@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body>
+    <h2>Esercizio 1</h2>
+    <ul id="listaUser"></ul>
+
+    <h2>Esercizio 2</h2>
+    <div id="container">
+      <h3>Inserisci Animale</h3>
+      <form id="aggiungiForm">
+        <label for="petName">Nome Animale</label>
+        <input
+          type="text"
+          id="petName"
+          name="petName"
+          placeholder="Nome Animale"
+          required
+        />
+        <br />
+        <label for="ownerName">Nome Proprietario</label>
+        <input
+          type="text"
+          id="ownerName"
+          name="ownerName"
+          placeholder="Nome Prodotto"
+          required
+        />
+        <br />
+        <label for="species">Specie</label>
+        <input
+          type="text"
+          id="species"
+          name="species"
+          placeholder="Specie Animale"
+        />
+        <br />
+        <label for="breed">Razza</label>
+        <input
+          type="text"
+          id="breed"
+          name="breed"
+          placeholder="Razza Animale / Meticcio"
+          required
+        />
+        <button type="submit">Aggiungi Animale</button>
+      </form>
+      <h3>Lista Animali</h3>
+      <div id="listaAnimali"></div>
+    </div>
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>

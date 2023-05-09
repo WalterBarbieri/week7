@@ -577,7 +577,7 @@ const array = [
 
 const container = document.getElementById("productContainer");
 const cart = document.getElementById('cart');
-const cartArray = [];
+let cartArray = [];
 
 function displayProducts(products) {
   products.forEach((product) => {
@@ -671,6 +671,7 @@ function displayProducts(products) {
 
     cartButton.onclick = function() {
         cartArray.push(product);
+        alert('Prodotto aggiunto a carrello');
         saveCart();
     }
   });
@@ -678,6 +679,12 @@ function displayProducts(products) {
 
 window.onload = function () {
   displayProducts(array);
+  if (localStorage.getItem('cartArray')) {
+    let arrayAsString = localStorage.getItem("cartArray");
+    let newProduct = JSON.parse(arrayAsString);
+    cartArray = newProduct;
+  }
+  console.log(cartArray);
 };
 
 

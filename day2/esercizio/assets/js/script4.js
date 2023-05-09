@@ -6,7 +6,6 @@ window.onload = function () {
     let arrayAsString = localStorage.getItem("cartArray");
     let newProduct = JSON.parse(arrayAsString);
     myCartList = newProduct;
-    console.log(myCartList);
 
     myCartList.forEach((product) => {
       const productDiv = document.createElement("div");
@@ -36,6 +35,7 @@ window.onload = function () {
       button.textContent = "Rimuovi dal carrello";
       button.type = "button";
       button.className = "button";
+      button.id = product.id;
 
       productDiv.appendChild(mainSectionDiv);
       mainSectionDiv.appendChild(thumbnail);
@@ -47,12 +47,16 @@ window.onload = function () {
       displayMyCart.appendChild(productDiv);
 
       somma(myCartList);
-      let currentId = product.id;
-      console.log(currentId);
 
-      button.onclick = function() {
+      button.onclick = function () {
         productDiv.remove();
+        const index = myCartList.indexOf(product);
+        if (index > -1) {
+          myCartList.splice(index, 1);
+          somma(myCartList);
+          localStorage.setItem("cartArray", JSON.stringify(myCartList));
         }
+      };
     });
   }
 };

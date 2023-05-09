@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rubrica in JS</title>
+    <style>
+      .container {
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Rubrica in JS</h2>
+      <form>
+        <div>
+          <input type="text" placeholder="Nome" id="name" />
+        </div>
+        <div>
+          <input type="text" placeholder="Cognome" id="surname" />
+        </div>
+        <div>
+          <input type="text" placeholder="Telefono" id="phone" />
+        </div>
+        <div id="buttonContainer">
+          <button id="saveButton">Salva</button>
+        </div>
+      </form>
+      <h3>Contatti Salvati</h3>
+      <ul id="listaContatti"></ul>
+    </div>
+    <script src="./assets/js/contact.js"></script>
+  </body>
+</html>

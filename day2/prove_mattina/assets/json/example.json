@@ -1,0 +1,26 @@
+{
+    "name": "Walter",
+    "surname": "Barbieri",
+    "age": 32,
+    "gender": "male",
+    "area": {
+        "name": "Europe",
+        "nation": "Italy",
+        "region": "Sicily"
+    },
+    "skills": [
+        {
+            "name": "Html",
+            "score": 6
+        },
+        {
+            "name": "Css",
+            "score": 7
+        },
+        {
+            "name": "Javascript",
+            "score": 4
+        }
+        
+    ]
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .container {
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h2 {
+        text-align: center;
+      }
+      textarea {
+        width: 100%;
+      }
+      .buttonContainer {
+        display: flex;
+        justify-content: space-around;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>Blocco Note</h2>
+      <textarea rows="15" placeholder="Inserisci del testo"></textarea>
+      <div class="buttonContainer">
+        <button type="button" id="saveButton">Salva</button>
+        <button type="button" id="deleteButton">Cancella</button>
+      </div>
+    </div>
+    <script src="./assets/js/notepad.js"></script>
+  </body>
+</html>

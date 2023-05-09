@@ -140,6 +140,7 @@ function checkSameOwner() {
           const ownerItem = document.createElement('li');
           ownerItem.innerHTML = `${ownerName}: ${owners[ownerName].join(', ')}`;
           ownerList.appendChild(ownerItem);
+          localStorage.setItem('lista', ownerItem.innerText);
         }
       }
       sameOwnerDiv.appendChild(ownerList);

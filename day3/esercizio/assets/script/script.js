@@ -88,7 +88,7 @@ function displayBooks(books) {
 
     const price = document.createElement("p");
     price.textContent = `Prezzo: $${book.price}`;
-
+    
     const removeButton = document.createElement("button");
     removeButton.className = "button";
     removeButton.textContent = "Scarta";
@@ -172,3 +172,4 @@ function somma(array) {
   }
   total.innerText = sum + " $";
 }
+

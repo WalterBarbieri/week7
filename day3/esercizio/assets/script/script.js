@@ -143,7 +143,6 @@ function displayBooks(books) {
       cartBook.appendChild(removeCartButton);
       myCart.appendChild(cartBook);
 
-      alert("Prodotto aggiunto a carrello");
       saveCart();
       somma(cartArray);
 

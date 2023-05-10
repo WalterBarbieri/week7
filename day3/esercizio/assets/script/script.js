@@ -71,6 +71,9 @@ function displayBooks(books) {
     const cardBodyDiv = document.createElement("div");
     cardBodyDiv.className = "cardBody";
 
+    const infoDiv = document.createElement('div');
+    infoDiv.className = 'infoDiv';
+
     const buttonDiv = document.createElement("div");
     buttonDiv.className = "buttonBody";
 
@@ -100,8 +103,9 @@ function displayBooks(books) {
     cardDiv.appendChild(cardImageDiv);
     cardImageDiv.appendChild(image);
     cardDiv.appendChild(cardBodyDiv);
-    cardBodyDiv.appendChild(title);
-    cardBodyDiv.appendChild(price);
+    cardBodyDiv.appendChild(infoDiv);
+    infoDiv.appendChild(title);
+    infoDiv.appendChild(price);
     cardBodyDiv.appendChild(buttonDiv);
     buttonDiv.appendChild(removeButton);
     buttonDiv.appendChild(saveButton);
@@ -119,7 +123,7 @@ function displayBooks(books) {
 
       const cartBook = document.createElement("div");
       cartBook.className = "cartBook";
-      cartBook.classList.add("mb-1");
+      cartBook.classList.add("mb-1", 'p-1', 'align-items-center');
 
       const cartTitle = document.createElement("li");
       cartTitle.textContent = book.title;

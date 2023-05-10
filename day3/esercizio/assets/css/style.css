@@ -23,6 +23,10 @@ body {
   height: 100%;
   border: 0.2em solid cadetblue;
   border-radius: 10px;
+  position: relative;
+}
+.image {
+    height: 400px;
 }
 .cardBody {
   background-color: aliceblue;
@@ -38,4 +42,12 @@ body {
 }
 .buttonBody button {
     margin-bottom: 0.5em;
+}
+.buttonBody {
+    position: absolute;
+    bottom: 1em;
+}
+.infoDiv {
+    font-size: 0.8em;
+    margin-bottom: 6em;
 }

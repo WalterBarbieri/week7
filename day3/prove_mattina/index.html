@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //JSON PLACEHOLDER API: ottenere una lista di contatti
+        const url = 'https://jsonplaceholder.typicode.com/users';
+
+        fetch(url)
+        .then(response => response.json())
+        .then(users => {
+            console.log('Utenti: ');
+            console.log('DATI UTENTE: ');
+            users.forEach(user => console.log(`${user.name} ${user.email}`));
+        })
+        .catch(error => console.error('Errore durante il recupero degli utenti: ', error));
+        //The dog api: ottenere un immagine casuale di un cane
+
+        const url2 = 'https://dog.ceo/api/breeds/image/random';
+
+        fetch(url2)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            console.log('URL dell\'immagine del cane: ', data.message);
+        })
+        .catch(error => console.error('Errore durante il recupero dell\'immagine del cane', error));
+
+        //API Italy GeoJSON: info regioni province comuni italiani da ISTAT
+        //province
+
+        const url4 = 'https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_provinces.geojson';
+
+            fetch(url4)
+            .then(response => response.json())
+            .then(data => {
+                console.log('Province italiane:');
+                data.features.forEach(province => console.log(province.properties.prov_name));
+            })
+            .catch(error => console.error('Errore durante il recupero delle province italiane:', error));
+        
+        //regioni   
+
+        const url3 = 'https://raw.githubusercontent.com/openpolis/geojson-italy/master/geojson/limits_IT_regions.geojson';
+
+            fetch(url3)
+            .then(response => response.json())
+            .then(data => {
+                console.log(('Regioni Italiane'));
+                data.features.forEach(region => console.log(region.properties.reg_name));
+            })
+            .catch(error => console.error('Errore durante il recupero delle regioni italiane: ', error));
+
+    </script>
+</body>
+</html>

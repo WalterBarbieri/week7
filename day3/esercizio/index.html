@@ -14,9 +14,13 @@
     <div class="container">
         <h1>Esercizio</h1>
         <h2>Libreria e-commerce</h2>
-        <h2>Carrello:</h2>
+        <div class="d-flex justify-content-between mb-1">
+            <h2>Carrello:</h2>
+            <h2>Totale: <span id="total"></span></h2>
+            <button type="button" class="button">Procedi al pagamento</button>
+        </div>
         <div>
-            <ul id="myCart"></ul>
+            <ul class="row ms-0 ps-0" id="myCart"></ul>
         </div>
         <div class="row" id="bookContainer"></div>
     </div>

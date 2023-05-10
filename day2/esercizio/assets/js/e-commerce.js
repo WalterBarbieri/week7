@@ -684,7 +684,6 @@ window.onload = function () {
     let newProduct = JSON.parse(arrayAsString);
     cartArray = newProduct;
   }
-  console.log(cartArray);
 };
 
 

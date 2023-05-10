@@ -1,20 +1,59 @@
 const url = "https://striveschool-api.herokuapp.com/books";
+const bookContainer = document.getElementById("bookContainer");
+const myCart = document.getElementById("myCart");
+const total = document.getElementById("total");
+let cartArray = [];
+
+/**Funzione onload */
 window.onload = function () {
   fetch(url)
     .then((raw) => {
       return raw.json();
     })
     .then((dati) => displayBooks(dati));
+  /* funzione per mostrare a display elementi salvati nel localStorage al caricamento*/
   if (localStorage.getItem("cartArray")) {
     let arrayAsString = localStorage.getItem("cartArray");
-    let newProduct = JSON.parse(arrayAsString);
-    myCartList = newProduct;
+    let oldLibrary = JSON.parse(arrayAsString);
+    cartArray = oldLibrary;
+
+    cartArray.forEach((book) => {
+      const cartBook = document.createElement("div");
+      cartBook.className = "cartBook";
+      cartBook.classList.add("mb-1", 'p-1', 'align-items-center');
+
+      const cartTitle = document.createElement("li");
+      cartTitle.textContent = book.title;
+      cartTitle.className = "col-6";
+
+      const cartPrice = document.createElement("li");
+      cartPrice.textContent = `Prezzo: $${book.price}`;
+      cartPrice.className = "col-3";
+
+      const removeCartButton = document.createElement("button");
+      removeCartButton.className = "button";
+      removeCartButton.textContent = "Rimuovi";
+      removeCartButton.type = "button";
+
+      cartBook.appendChild(cartTitle);
+      cartBook.appendChild(cartPrice);
+      cartBook.appendChild(removeCartButton);
+      myCart.appendChild(cartBook);
+
+      somma(cartArray);
+
+      removeCartButton.onclick = function() {
+        cartBook.remove();
+        const index = cartArray.indexOf(book);
+        if (index > -1) {
+          cartArray.splice(index, 1);
+          somma(cartArray);
+          localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        }
+      }
+    });
   }
 };
-const bookContainer = document.getElementById("bookContainer");
-const myCart = document.getElementById('myCart');
-let cartArray = [];
-let myCartArray = [];
 
 function displayBooks(books) {
   books.forEach((book) => {
@@ -45,7 +84,7 @@ function displayBooks(books) {
     title.textContent = `Titolo: ${book.title}`;
 
     const price = document.createElement("p");
-    price.textContent = `Prezzo: ${book.price}`;
+    price.textContent = `Prezzo: $${book.price}`;
 
     const removeButton = document.createElement("button");
     removeButton.className = "button";
@@ -74,30 +113,59 @@ function displayBooks(books) {
       bookDiv.remove();
     };
 
-    /**Funzione save Button */
+    /**Funzione save Button con display oggetti nel carrello*/
     saveButton.onclick = function () {
       cartArray.push(book);
-      
-      const cartBook = document.createElement('div');
-      cartBook.className = 'cartBook';
-      
-      const cartTitle = document.createElement('li');
-      cartTitle.textContent = book.title;
 
-      const cartPrice = document.createElement('li');
-      cartPrice.textContent = book.price;
+      const cartBook = document.createElement("div");
+      cartBook.className = "cartBook";
+      cartBook.classList.add("mb-1");
+
+      const cartTitle = document.createElement("li");
+      cartTitle.textContent = book.title;
+      cartTitle.className = "col-6";
+
+      const cartPrice = document.createElement("li");
+      cartPrice.textContent = `Prezzo: $${book.price}`;
+      cartPrice.className = "col-3";
+
+      const removeCartButton = document.createElement("button");
+      removeCartButton.className = "button";
+      removeCartButton.textContent = "Rimuovi";
+      removeCartButton.type = "button";
 
       cartBook.appendChild(cartTitle);
       cartBook.appendChild(cartPrice);
-      myCart.appendChild(cartBook);  
+      cartBook.appendChild(removeCartButton);
+      myCart.appendChild(cartBook);
 
       alert("Prodotto aggiunto a carrello");
       saveCart();
+      somma(cartArray);
+
+      removeCartButton.onclick = function() {
+        cartBook.remove();
+        const index = cartArray.indexOf(book);
+        if (index > -1) {
+          cartArray.splice(index, 1);
+          somma(cartArray);
+          localStorage.setItem("cartArray", JSON.stringify(cartArray));
+        }
+      }
     };
   });
 }
-
+/**Local storage set item al save */
 function saveCart() {
   const arrayAsString = JSON.stringify(cartArray);
   localStorage.setItem("cartArray", arrayAsString);
+}
+
+/**Funzione per sommare il totale */
+function somma(array) {
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    sum += (array[i].price);
+  }
+  total.innerText = sum + " $";
 }

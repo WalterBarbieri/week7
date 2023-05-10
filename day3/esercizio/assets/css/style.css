@@ -1,32 +1,41 @@
 body {
-    box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    color: cadetblue;
-    background-color: aliceblue;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: cadetblue;
+  background-color: aliceblue;
 }
 .button {
-    background-color: cadetblue;
-    color: aliceblue;
-    border: 0;
-    border-radius: 10px;
-    font-size: 1em;
-    padding: 0.3em;
-    margin-right: 1em;
-  }
-  .button:hover {
-      box-shadow: inset 2px 2px 5px 2px rgb(83, 121, 170);
-      
-  }
+  background-color: cadetblue;
+  color: aliceblue;
+  border: 0;
+  border-radius: 10px;
+  font-size: 1em;
+  padding: 0.3em;
+  margin-right: 1em;
+}
+.button:hover {
+  box-shadow: inset 2px 2px 5px 2px rgb(83, 121, 170);
+}
 .book {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
 }
 .card {
-    height: 100%;
-    border: 0.2em solid cadetblue;
-    border-radius: 10px;
+  height: 100%;
+  border: 0.2em solid cadetblue;
+  border-radius: 10px;
 }
 .cardBody {
-    background-color: aliceblue;
-    height: -webkit-fill-available;
-    padding: 1em;
+  background-color: aliceblue;
+  height: -webkit-fill-available;
+  padding: 1em;
+}
+.cartBook {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+  border: 2px solid;
+  border-radius: 10px;
+}
+.buttonBody button {
+    margin-bottom: 0.5em;
 }

@@ -4,10 +4,12 @@ const apiKey = "eWk2kk7QevGUr4V4lGaX2fuuMZBBHVc4QV2DuFKVwaRyNGbvqWhY9loA";
 const url = "https://api.pexels.com/v1/search?query=dog";
 const url2 = "https://api.pexels.com/v1/search?query=cat";
 const url3 = "https://api.pexels.com/v1/search?query=horse";
+
 const photoContainer = document.getElementById("photoContainer");
 const loadBtn1 = document.getElementById("load1");
 const loadBtn2 = document.getElementById("load2");
-const input = document.getElementById('inputField');
+const input = document.getElementById("inputField");
+const inputButton = document.getElementById("inputButton");
 
 /**FUnzione onload */
 window.onload = function () {
@@ -22,7 +24,7 @@ window.onload = function () {
     })
     .then((dati) => {
       displayImages(dati.photos);
-      console.log(dati.photos);
+      console.log(dati);
     });
 };
 
@@ -37,6 +39,10 @@ function displayImages(images) {
 
     const imgContainer = document.createElement("div");
     imgContainer.classList.add("d-flex", "justify-content-center");
+
+    const imageAnchor = document.createElement('a');
+    imageAnchor.href = "./Detail-template.html";
+
     const img = document.createElement("img");
     img.className = "img";
     img.src = image.src.medium;
@@ -45,9 +51,12 @@ function displayImages(images) {
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
 
+    const titleAnchor = document.createElement('a');
+    imageAnchor.href = "./Detail-template.html";
+
     const title = document.createElement("h5");
     title.className = "card-title";
-    title.textContent = "Lorem Ipsum";
+    title.textContent = image.photographer;
 
     const text = document.createElement("p");
     text.className = "card-text";
@@ -81,7 +90,8 @@ function displayImages(images) {
 
     cardContainer.appendChild(card);
     card.appendChild(imgContainer);
-    imgContainer.appendChild(img);
+    imgContainer.appendChild(imageAnchor);
+    imageAnchor.appendChild(img);
     card.appendChild(cardBody);
     cardBody.appendChild(title);
     cardBody.appendChild(text);
@@ -91,16 +101,26 @@ function displayImages(images) {
     buttonContainer.appendChild(button2);
     cardSection.appendChild(small);
     photoContainer.appendChild(cardContainer);
+    
+    /** Funzione bottono Hide */
+    button2.onclick = function () {
+      cardContainer.remove();
+    };
 
-    button2.onclick = function() {
-        cardContainer.remove();
+    /**Funzione anchor */
+
+    imageAnchor.onclick = function() {
+        const selectedImage = image.id;
+    
+        const objAsString = JSON.stringify(selectedImage);
+        sessionStorage.setItem('selectedItem', objAsString);
     }
   });
-};
+}
 
 /**Funzione button load images*/
 
-function loadGatti() {
+loadBtn1.onclick = function () {
   fetch(url2, {
     method: "GET",
     headers: {
@@ -111,32 +131,44 @@ function loadGatti() {
       return raw.json();
     })
     .then((gatti) => {
-      photoContainer.innerHTML = '';
+      photoContainer.innerHTML = "";
       displayImages(gatti.photos);
-      console.log(gatti.photos);
     });
-};
+}
 
-loadBtn1.onclick = loadGatti;
 
-function loadCavalli() {
-    fetch(url3, {
-      method: "GET",
-      headers: {
-        Authorization: apiKey,
-      },
+loadBtn2.onclick = function () {
+  fetch(url3, {
+    method: "GET",
+    headers: {
+      Authorization: apiKey,
+    },
+  })
+    .then((raw) => {
+      return raw.json();
     })
-      .then((raw) => {
-        return raw.json();
+    .then((cavalli) => {
+      photoContainer.innerHTML = "";
+      displayImages(cavalli.photos);
+    });
+}
+
+/** Function input search */
+
+inputButton.onclick = function() {
+    let stringToArray = input.value.replaceAll(/ /g, '%20');    
+    const url4 = "https://api.pexels.com/v1/search?query=" + stringToArray;
+    fetch(url4, {
+        method: "GET",
+        headers: {
+          Authorization: apiKey,
+        },
       })
-      .then((cavalli) => {
-        photoContainer.innerHTML = '';
-        displayImages(cavalli.photos);
-        console.log(cavalli.photos);
-      });
-  };
-
-  loadBtn2.onclick = loadCavalli;
-
-  /** Function input search */
-  
+        .then((raw) => {
+          return raw.json();
+        })
+        .then((random) => {
+          photoContainer.innerHTML = "";
+          displayImages(random.photos);
+        });    
+}

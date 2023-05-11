@@ -4,6 +4,11 @@ const myCart = document.getElementById("myCart");
 const total = document.getElementById("total");
 let cartArray = [];
 
+/* Questa la funzione per far attivare i POPOVERS
+const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]');
+const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl));
+*/
+
 /**Funzione onload */
 window.onload = function () {
   fetch(url)
@@ -98,6 +103,9 @@ function displayBooks(books) {
     saveButton.className = "button";
     saveButton.textContent = "Compra ora";
     saveButton.type = "button";
+    /* Qua dove ho provato ad inserire le classi per il POPOVERS
+    saveButton.classList.add('data-bs-toggle="popover"', 'data-bs-title="Popover_title"', 'data-bs-content="Bello"');
+    */
 
     bookDiv.appendChild(cardDiv);
     cardDiv.appendChild(cardImageDiv);
@@ -170,6 +178,6 @@ function somma(array) {
   for (let i = 0; i < array.length; i++) {
     sum += (array[i].price);
   }
-  total.innerText = sum + " $";
+  total.innerText = Math.ceil(sum) + " $";
 }
 

@@ -63,7 +63,7 @@ function displayObj(objects) {
     const findMoreButton = document.createElement("button");
     findMoreButton.type = "button";
     findMoreButton.classList.add("button");
-    findMoreButton.text = "Scopri di più";
+    findMoreButton.textContent = "Scopri di più";
     
     objDiv.appendChild(imageDiv);
     imageDiv.appendChild(objImage);
@@ -85,6 +85,17 @@ function displayObj(objects) {
         sessionStorage.setItem('selectedProduct', objAsString);
 
         window.location.href="./backOffice.html";
+    }
+
+    /**Funzione Find More Button */
+
+    findMoreButton.onclick = function() {
+        const selectedProduct = object._id;
+    
+        const objAsString = JSON.stringify(selectedProduct);
+        sessionStorage.setItem('selectedProduct', objAsString);
+
+        window.location.href="./detailPage.html";
     }
   });
 }

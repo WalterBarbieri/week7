@@ -8,36 +8,111 @@
       rel="stylesheet"
       href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
-    <div class="container">
+    <header>
+      <div class="container d-flex justify-content-between align-items-center">
         <h1>Back Office Drink Better</h1>
+        <a href="./homePage.html"
+          ><img
+            src="./assets/img/house-door-fill.svg"
+            alt="homeObjContainer"
+            id="homeIcon"
+        /></a>
+      </div>
+    </header>
+    <main>
+      <div class="container">
         <div class="mb-2">
           <h2>Crea un Nuovo Oggetto!</h2>
           <form id="inputForm">
-              <input type="text" name="name" id="name" placeholder="Nome" required>
-              <input type="text" name="description" id="description" placeholder="Description" required>
-              <input type="text" name="brand" id="brand" placeholder="Brand" required>
-              <input type="text" name="imageUrl" id="imageUrl" placeholder="ImageUrl" required>
-              <input type="number" name="price" id="price" placeholder="Price" required>
-              <div>
-                <button type="submit" id="inputButton" class="button">Aggiungi Oggetto</button>
-                <button type="submit" id="modifyButton" class="button" disabled hidden>Modifica Oggetto</button>
-                <button type="submit" id="backButton" class="button" disabled hidden>Indietro</button>
-              </div>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Nome"
+              required
+            />
+            <input
+              type="text"
+              name="description"
+              id="description"
+              placeholder="Description"
+              required
+            />
+            <input
+              type="text"
+              name="brand"
+              id="brand"
+              placeholder="Brand"
+              required
+            />
+            <input
+              type="text"
+              name="imageUrl"
+              id="imageUrl"
+              placeholder="ImageUrl"
+              required
+            />
+            <input
+              type="number"
+              name="price"
+              id="price"
+              placeholder="Price"
+              required
+            />
+            <div>
+              <button type="submit" id="inputButton" class="button">
+                Aggiungi Oggetto
+              </button>
+              <button
+                type="submit"
+                id="modifyButton"
+                class="button"
+                disabled
+                hidden
+              >
+                Modifica Oggetto
+              </button>
+              <button
+                type="submit"
+                id="backButton"
+                class="button"
+                disabled
+                hidden
+              >
+                Indietro
+              </button>
+            </div>
           </form>
         </div>
         <div>
           <h2>Modifica o Rimuovi un Oggetto!</h2>
           <form id="searchForm">
-            <input type="text" name="idInput" id="idInput" placeholder="ID Oggetto" required>
-            <button type="submit" id="searchButton" class="button">Trova Oggetto</button>
-            
+            <input
+              type="text"
+              name="idInput"
+              id="idInput"
+              placeholder="ID Oggetto"
+              required
+            />
+            <button type="submit" id="searchButton" class="button">
+              Trova Oggetto
+            </button>
           </form>
         </div>
         <div id="objContainer" class="row"></div>
-    </div>
+      </div>
+    </main>
+    <footer>
+      <p>© Drink Better Spa, All rights Reserved</p>
+      <div class="d-flex justify-content-center">
+        <img src="./assets/img/facebook.svg" alt="facebook logo" class="footerLogo">
+        <img src="./assets/img/instagram.svg" alt="instagram logo" class="footerLogo">
+        <img src="./assets/img/twitter.svg" alt="twitter logo" class="footerLogo">
+      </div>
+    </footer>
     <script src="./assets/js/backOffice.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>

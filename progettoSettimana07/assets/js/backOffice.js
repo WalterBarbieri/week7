@@ -20,6 +20,7 @@ const apiKey =
 
 inputButton.onclick = function (event) {
   event.preventDefault();
+  sessionStorage.clear();
   const data = {
     name: prodName.value,
     description: prodDescription.value,
@@ -49,7 +50,35 @@ inputButton.onclick = function (event) {
 
 /**Funzione display oggetti */
 window.onload = function () {
-  fetchAndDisplay();
+  if (sessionStorage.getItem("selectedProduct")) {
+    searchButton.disabled = true;
+    let objAsString = JSON.parse(sessionStorage.getItem("selectedProduct"));
+    const url2 =
+      "https://striveschool-api.herokuapp.com/api/product/" + objAsString;
+    fetch(url2, {
+      method: "GET",
+      headers: {
+        Authorization: apiKey,
+      },
+    })
+      .then((raw) => {
+        return raw.json();
+      })
+      .then((dato) => {
+        console.log(dato);
+        displayIdObj(dato);
+        inputButton.disabled = true;
+        modifyButton.disabled = false;
+        modifyButton.hidden = false;
+        backButton.disabled = false;
+        backButton.hidden = false;
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  } else {
+    fetchAndDisplay();
+  }
 };
 
 const fetchAndDisplay = function () {
@@ -102,7 +131,7 @@ function displayObj(objects) {
 
     const idAnchor = document.createElement("a");
     idAnchor.text = "ID: " + object._id;
-    idAnchor.href = "#idInput";
+    idAnchor.href = "#inputButton";
     idAnchor.className = "anchor";
 
     objDiv.appendChild(imageDiv);
@@ -127,11 +156,6 @@ function displayObj(objects) {
 /**Funzione Search By Id */
 searchButton.onclick = function (event) {
   event.preventDefault();
-  inputButton.disabled = true;
-  modifyButton.disabled = false;
-  modifyButton.hidden = false;
-  backButton.disabled = false;
-  backButton.hidden = false;
 
   if (searchForm.checkValidity()) {
     const url2 =
@@ -155,6 +179,11 @@ searchButton.onclick = function (event) {
         console.log(dato);
         objContainer.innerHTML = "";
         displayIdObj(dato);
+        inputButton.disabled = true;
+        modifyButton.disabled = false;
+        modifyButton.hidden = false;
+        backButton.disabled = false;
+        backButton.hidden = false;
       })
       .catch((error) => {
         alert(error.message);
@@ -214,6 +243,7 @@ function displayIdObj(object) {
 
   /**Funzione Delete Button */
   objDeleteButton.onclick = function () {
+    sessionStorage.clear();
     const url2 =
       "https://striveschool-api.herokuapp.com/api/product/" + idSearch.value;
     fetch(url2, {
@@ -236,6 +266,7 @@ function displayIdObj(object) {
         modifyButton.hidden = true;
         backButton.disabled = true;
         backButton.hidden = true;
+        searchButton.disabled = false;
         return;
       })
       .catch((error) => {
@@ -246,6 +277,7 @@ function displayIdObj(object) {
 
 /**Funzione Modify Button */
 modifyButton.onclick = function (event) {
+  sessionStorage.clear();
   const url2 =
     "https://striveschool-api.herokuapp.com/api/product/" + idSearch.value;
   event.preventDefault();
@@ -277,13 +309,15 @@ modifyButton.onclick = function (event) {
     (modifyButton.disabled = true),
     (modifyButton.hidden = true),
     (backButton.disabled = true),
-    (backButton.hidden = true)
+    (backButton.hidden = true),
+    (searchButton.disabled = false)
   );
 };
 
 /**Funzione Back Buttone */
 
 backButton.onclick = function (event) {
+  sessionStorage.clear();
   event.preventDefault();
   objContainer.innerHTML = "";
   idSearch.value = "";
@@ -292,5 +326,6 @@ backButton.onclick = function (event) {
   modifyButton.hidden = true;
   backButton.disabled = true;
   backButton.hidden = true;
+  searchButton.disabled = false;
   fetchAndDisplay();
 };

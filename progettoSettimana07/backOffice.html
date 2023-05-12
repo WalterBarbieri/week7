@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WalterWeek7ProgettoSettimanale - BackOffice</title>
+    <link
+      rel="stylesheet"
+      href="../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body>
+    <div class="container">
+        <h1>Back Office Drink Better</h1>
+        <div class="mb-2">
+          <h2>Crea un Nuovo Oggetto!</h2>
+          <form id="inputForm">
+              <input type="text" name="name" id="name" placeholder="Nome" required>
+              <input type="text" name="description" id="description" placeholder="Description" required>
+              <input type="text" name="brand" id="brand" placeholder="Brand" required>
+              <input type="text" name="imageUrl" id="imageUrl" placeholder="ImageUrl" required>
+              <input type="number" name="price" id="price" placeholder="Price" required>
+              <div>
+                <button type="submit" id="inputButton" class="button">Aggiungi Oggetto</button>
+                <button type="submit" id="modifyButton" class="button" disabled hidden>Modifica Oggetto</button>
+                <button type="submit" id="backButton" class="button" disabled hidden>Indietro</button>
+              </div>
+          </form>
+        </div>
+        <div>
+          <h2>Modifica o Rimuovi un Oggetto!</h2>
+          <form id="searchForm">
+            <input type="text" name="idInput" id="idInput" placeholder="ID Oggetto" required>
+            <button type="submit" id="searchButton" class="button">Trova Oggetto</button>
+            
+          </form>
+        </div>
+        <div id="objContainer" class="row"></div>
+    </div>
+    <script src="./assets/js/backOffice.js"></script>
+    <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

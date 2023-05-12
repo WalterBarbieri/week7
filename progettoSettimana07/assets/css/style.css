@@ -1,0 +1,52 @@
+body {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  color: cadetblue;
+  background-color: aliceblue;
+}
+.button {
+  background-color: cadetblue;
+  color: aliceblue;
+  border: 0;
+  border-radius: 10px;
+  font-size: 1em;
+  padding: 0.3em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+}
+.button:hover {
+  box-shadow: inset 2px 2px 5px 2px rgb(83, 121, 170);
+}
+.button:disabled {
+    box-shadow: none;
+    background-color: rgb(139, 189, 190);
+    color: whitesmoke;
+}
+.objImage {
+  max-width: 200px;
+}
+.infoDiv {
+  margin-left: 2em;
+}
+input {
+    margin-bottom: 1em;
+    background-color: aliceblue;
+    border: 2px solid cadetblue;
+    border-radius: 10px;
+    color: cadetblue;
+}
+.objDiv {
+    border: 2px solid cadetblue;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    max-width: 500px;
+}
+.anchor {
+    font-family: Arial, Helvetica, sans-serif;
+    color: cadetblue;
+    text-decoration: none;
+}
+.anchor:hover {
+    color: cadetblue;
+}

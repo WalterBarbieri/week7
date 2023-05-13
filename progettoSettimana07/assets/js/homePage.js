@@ -3,9 +3,9 @@ const apiKey =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDVkOGIyZjg4Zjc0MDAwMTQyODc0MTAiLCJpYXQiOjE2ODM4NTIwNzksImV4cCI6MTY4NTA2MTY3OX0.jxr2SpjKDwYilHZUG0JnZh5qIm_u-JJT1fxbaoO36aM";
 const homeObjContainer = document.getElementById("homeObjContainer");
 
-
 /**Funzione Display Oggetti*/
 window.onload = function () {
+  showSpinner();
   fetchAndDisplay();
 };
 
@@ -22,6 +22,7 @@ const fetchAndDisplay = function () {
     .then((dati) => {
       console.log(dati);
       displayObj(dati);
+      hideSpinner();
     });
 };
 
@@ -41,7 +42,7 @@ function displayObj(objects) {
 
     const infoDiv = document.createElement("div");
     infoDiv.className = "infoDiv";
-    infoDiv.classList.add('d-flex', 'flex-column', 'justify-content-evenly')
+    infoDiv.classList.add("d-flex", "flex-column", "justify-content-evenly");
 
     const objName = document.createElement("h3");
     objName.textContent = "Name: " + object.name;
@@ -58,13 +59,13 @@ function displayObj(objects) {
     const homeModifyButton = document.createElement("button");
     homeModifyButton.type = "button";
     homeModifyButton.classList.add("button");
-    homeModifyButton.textContent = "Modifica";  
+    homeModifyButton.textContent = "Modifica";
 
     const findMoreButton = document.createElement("button");
     findMoreButton.type = "button";
     findMoreButton.classList.add("button");
     findMoreButton.textContent = "Scopri di più";
-    
+
     objDiv.appendChild(imageDiv);
     imageDiv.appendChild(objImage);
     objDiv.appendChild(infoDiv);
@@ -78,26 +79,36 @@ function displayObj(objects) {
 
     /**Funzione Modify Button */
 
-    homeModifyButton.onclick = function() {
-        const selectedProduct = object._id;
-    
-        const objAsString = JSON.stringify(selectedProduct);
-        sessionStorage.setItem('selectedProduct', objAsString);
+    homeModifyButton.onclick = function () {
+      const selectedProduct = object._id;
 
-        window.location.href="./backOffice.html";
-    }
+      const objAsString = JSON.stringify(selectedProduct);
+      sessionStorage.setItem("selectedProduct", objAsString);
+
+      window.location.href = "./backOffice.html";
+    };
 
     /**Funzione Find More Button */
 
-    findMoreButton.onclick = function() {
-        const selectedProduct = object._id;
-    
-        const objAsString = JSON.stringify(selectedProduct);
-        sessionStorage.setItem('selectedProduct', objAsString);
+    findMoreButton.onclick = function () {
+      const selectedProduct = object._id;
 
-        window.location.href="./detailPage.html";
-    }
+      const objAsString = JSON.stringify(selectedProduct);
+      sessionStorage.setItem("selectedProduct", objAsString);
+
+      window.location.href = "./detailPage.html";
+    };
   });
 }
 
+/**Funzione Spinner */
 
+const spinner = document.getElementById("spinner");
+
+function showSpinner() {
+  spinner.style.display = "block";
+}
+
+function hideSpinner() {
+  spinner.style.display = "none";
+}

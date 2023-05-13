@@ -28,31 +28,47 @@ inputButton.onclick = function (event) {
     imageUrl: prodImageUrl.value,
     price: prodPrice.value,
   };
-
-  fetch(url, {
-    method: "POST",
-    headers: {
-      Authorization: apiKey,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(
-    (response) => response.json(),
-    (objContainer.innerHTML = ""),
-    fetchAndDisplay(),
-    (prodName.value = ""),
-    (prodDescription.value = ""),
-    (prodBrand.value = ""),
-    (prodImageUrl.value = ""),
-    (prodPrice.value = "")
-  );
+  if (
+    data.name !== "" &&
+    data.description !== "" &&
+    data.brand !== "" &&
+    data.imageUrl !== "" &&
+    data.price !== ""
+  ) {
+    fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: apiKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then(
+        (response) => response.json(),
+        (objContainer.innerHTML = ""),
+        (prodName.value = ""),
+        (prodDescription.value = ""),
+        (prodBrand.value = ""),
+        (prodImageUrl.value = ""),
+        (prodPrice.value = ""),
+        (idSearch.value = ""),
+        alert('Oggetto caricato con successo')
+      )
+      .then(fetchAndDisplay());
+  } else {
+    alert(
+      "Attenzione, inserisci tutti i valori di input per creare un oggetto"
+    );
+  }
 };
 
 /**Funzione display oggetti */
 window.onload = function () {
+  $('[data-toggle="tooltip"]').tooltip();
   if (sessionStorage.getItem("selectedProduct")) {
     searchButton.disabled = true;
     let objAsString = JSON.parse(sessionStorage.getItem("selectedProduct"));
+    idSearch.value = objAsString;
     const url2 =
       "https://striveschool-api.herokuapp.com/api/product/" + objAsString;
     fetch(url2, {
@@ -92,7 +108,6 @@ const fetchAndDisplay = function () {
       return raw.json();
     })
     .then((dati) => {
-      console.log(dati);
       displayObj(dati);
     });
 };
@@ -179,7 +194,7 @@ searchButton.onclick = function (event) {
         console.log(dato);
         objContainer.innerHTML = "";
         displayIdObj(dato);
-        inputButton.disabled = true;
+        prodName.value = inputButton.disabled = true;
         modifyButton.disabled = false;
         modifyButton.hidden = false;
         backButton.disabled = false;
@@ -189,7 +204,9 @@ searchButton.onclick = function (event) {
         alert(error.message);
       });
   } else {
-    alert("Inserire un ID");
+    alert(
+      "Inserisci un ID o clicca sull'ID dell'oggetto desiderato per passare alla modalità modifica/elimina"
+    );
     return;
   }
 };
@@ -241,37 +258,55 @@ function displayIdObj(object) {
 
   objContainer.appendChild(objDiv);
 
+  prodName.value = object.name;
+  prodDescription.value = object.description;
+  prodBrand.value = object.brand;
+  prodImageUrl.value = object.imageUrl;
+  prodPrice.value = object.price;
+
   /**Funzione Delete Button */
   objDeleteButton.onclick = function () {
-    sessionStorage.clear();
-    const url2 =
-      "https://striveschool-api.herokuapp.com/api/product/" + idSearch.value;
-    fetch(url2, {
-      method: "DELETE",
-      headers: {
-        Authorization: apiKey,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Errore durante la rimozione dell'oggetto.");
-        }
-        console.log("Oggetto rimosso con successo."),
-          (objContainer.innerHTML = ""),
-          fetchAndDisplay();
-        idSearch.value = "";
-        inputButton.disabled = false;
-        modifyButton.disabled = true;
-        modifyButton.hidden = true;
-        backButton.disabled = true;
-        backButton.hidden = true;
-        searchButton.disabled = false;
-        return;
+    let result = confirm("Sei sicuro di voler eliminare l'oggetto?");
+
+    if (result === true) {
+      sessionStorage.clear();
+      const url2 =
+        "https://striveschool-api.herokuapp.com/api/product/" + idSearch.value;
+      fetch(url2, {
+        method: "DELETE",
+        headers: {
+          Authorization: apiKey,
+          "Content-Type": "application/json",
+        },
       })
-      .catch((error) => {
-        console.error(error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Errore durante la rimozione dell'oggetto.");
+          }
+          alert("Oggetto rimosso con successo."),
+            (objContainer.innerHTML = ""),
+            fetchAndDisplay();
+          idSearch.value = "";
+          idSearch.value = "";
+          prodName.value = "";
+          prodDescription.value = "";
+          prodBrand.value = "";
+          prodImageUrl.value = "";
+          prodPrice.value = "";
+          inputButton.disabled = false;
+          modifyButton.disabled = true;
+          modifyButton.hidden = true;
+          backButton.disabled = true;
+          backButton.hidden = true;
+          searchButton.disabled = false;
+          fetchAndDisplay();
+          return;
+        }).catch((error) => {
+          console.error(error);
+        });
+    } else {
+      return;
+    }
   };
 }
 
@@ -288,30 +323,43 @@ modifyButton.onclick = function (event) {
     imageUrl: prodImageUrl.value,
     price: prodPrice.value,
   };
-
-  fetch(url2, {
-    method: "PUT",
-    headers: {
-      Authorization: apiKey,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  }).then(
-    (response) => response.json(),
-    (objContainer.innerHTML = ""),
-    fetchAndDisplay(),
-    (prodName.value = ""),
-    (prodDescription.value = ""),
-    (prodBrand.value = ""),
-    (prodImageUrl.value = ""),
-    (prodPrice.value = ""),
-    (inputButton.disabled = false),
-    (modifyButton.disabled = true),
-    (modifyButton.hidden = true),
-    (backButton.disabled = true),
-    (backButton.hidden = true),
-    (searchButton.disabled = false)
-  );
+  if (
+    data.name !== "" &&
+    data.description !== "" &&
+    data.brand !== "" &&
+    data.imageUrl !== "" &&
+    data.price !== ""
+  ) {
+    fetch(url2, {
+      method: "PUT",
+      headers: {
+        Authorization: apiKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then(
+      (response) => response.json(),
+      (objContainer.innerHTML = ""),
+      (prodName.value = ""),
+      (prodDescription.value = ""),
+      (prodBrand.value = ""),
+      (prodImageUrl.value = ""),
+      (prodPrice.value = ""),
+      (idSearch.value = ""),
+      (inputButton.disabled = false),
+      (modifyButton.disabled = true),
+      (modifyButton.hidden = true),
+      (backButton.disabled = true),
+      (backButton.hidden = true),
+      (searchButton.disabled = false),
+      alert('Oggetto modificato con successo'),
+      fetchAndDisplay()
+    );
+  } else {
+    alert(
+      "Attenzione, inserisci tutti i valori di input per modificare un oggetto"
+    );
+  }
 };
 
 /**Funzione Back Buttone */
@@ -321,6 +369,11 @@ backButton.onclick = function (event) {
   event.preventDefault();
   objContainer.innerHTML = "";
   idSearch.value = "";
+  prodName.value = "";
+  prodDescription.value = "";
+  prodBrand.value = "";
+  prodImageUrl.value = "";
+  prodPrice.value = "";
   inputButton.disabled = false;
   modifyButton.disabled = true;
   modifyButton.hidden = true;
@@ -329,3 +382,4 @@ backButton.onclick = function (event) {
   searchButton.disabled = false;
   fetchAndDisplay();
 };
+

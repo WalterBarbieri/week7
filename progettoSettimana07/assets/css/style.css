@@ -3,6 +3,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   color: cadetblue;
   background-color: aliceblue;
+  height: 100vh;
 }
 header {
     background-color: cadetblue;
@@ -19,8 +20,6 @@ footer {
     padding-top: 0.5em ;
     padding-bottom: 0.5em;
     margin-top: 1em;
-    position: sticky;
-    bottom: 0;
     text-align: center;
 }
 .button {
@@ -98,3 +97,21 @@ input {
 footer p {
     margin-bottom: 0.5em;
 }
+#spinner {
+    margin-left: 5em;
+}
+h2 {
+    display: inline-block;
+}
+
+.tooltip-inner {
+    background-color: cadetblue;
+    box-shadow: 0px 0px 4px black;
+    opacity: 1 !important;
+}
+
+/* Ho trovato questo codice sul web per cambiare il colore alla freccia ma non funziona*/
+.tooltip.bs-tooltip-end .tooltip-arrow::before {
+    border-right-color: cadetblue !important;
+}
+

@@ -25,7 +25,7 @@
     <main>
       <div class="container">
         <div class="mb-2">
-          <h2>Crea un Nuovo Oggetto!</h2>
+          <h2 data-toggle="tooltip" title="Inserire tutti i campi e premere invio per creare un nuovo oggetto!" data-bs-placement="right">Crea un Nuovo Oggetto!</h2>
           <form id="inputForm">
             <input
               type="text"
@@ -88,7 +88,7 @@
           </form>
         </div>
         <div>
-          <h2>Modifica o Rimuovi un Oggetto!</h2>
+          <h2 data-toggle="tooltip" title="Cerca un oggetto tramite ID (puoi cliccare sull'ID dell'oggetto desiderato per inserire automaticamente l'ID nella barra di ricerca) per passare alla modalità modifica/elimina" data-bs-placement="right">Modifica o Rimuovi un Oggetto!</h2>
           <form id="searchForm">
             <input
               type="text"
@@ -113,6 +113,8 @@
         <img src="./assets/img/twitter.svg" alt="twitter logo" class="footerLogo">
       </div>
     </footer>
+    
+    
     <script src="./assets/js/backOffice.js"></script>
     <script src="../node_modules/jquery/dist/jquery.min.js"></script>
     <script src="../../node_modules/@popperjs/core/dist/umd/popper.min.js"></script>

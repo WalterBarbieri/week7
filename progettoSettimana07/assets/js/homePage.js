@@ -7,6 +7,7 @@ const homeObjContainer = document.getElementById("homeObjContainer");
 window.onload = function () {
   showSpinner();
   fetchAndDisplay();
+  $('[data-toggle="tooltip"]').tooltip();
 };
 
 const fetchAndDisplay = function () {

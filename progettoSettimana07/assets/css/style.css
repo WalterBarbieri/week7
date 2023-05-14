@@ -2,28 +2,27 @@ body {
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
   color: cadetblue;
-  background-color: aliceblue;
-  height: 100vh;
+  background: linear-gradient(90deg, aliceblue, lightgray);
 }
 header {
-    background-color: cadetblue;
-    color: #f0f8ff;
-    padding-top: 1em ;
-    padding-bottom: 1em;
-    margin-bottom: 1em;
-    position: sticky;
-    top: 0;
+  background: linear-gradient(90deg, cadetblue, #719395);
+  color: #f0f8ff;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin-bottom: 1em;
+  position: sticky;
+  top: 0;
 }
 footer {
-    background-color: cadetblue;
-    color: #f0f8ff;
-    padding-top: 0.5em ;
-    padding-bottom: 0.5em;
-    margin-top: 1em;
-    text-align: center;
+  background: linear-gradient(90deg, cadetblue, #719395);
+  color: #f0f8ff;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  margin-top: 1em;
+  text-align: center;
 }
 .button {
-  background-color: cadetblue;
+  background-color:  cadetblue;
   color: aliceblue;
   border: 0;
   border-radius: 10px;
@@ -36,82 +35,123 @@ footer {
   box-shadow: inset 2px 2px 5px 2px rgb(83, 121, 170);
 }
 .button:disabled {
-    box-shadow: none;
-    background-color: rgb(139, 189, 190);
-    color: whitesmoke;
+  box-shadow: none;
+  background-color: rgb(139, 189, 190);
+  color: whitesmoke;
 }
 .objImage {
   max-width: 200px;
+  margin: 1em 0 1em 0;
 }
 .objImage2 {
-    max-height: 800px;
+  max-height: 800px;
+  margin: 1em 0 1em 0;
+  transition: all 1s;
+}
+.objImage2:hover {
+  transform: scale(1.2);
 }
 .infoDiv {
   margin-left: 2em;
 }
 .infoDiv2 {
-    font-size: 1.4em;
+  font-size: 1.4em;
 }
 input {
-    margin-bottom: 1em;
-    background-color: aliceblue;
-    border: 2px solid cadetblue;
-    border-radius: 10px;
-    color: cadetblue;
+  margin-bottom: 1em;
+  background-color: aliceblue;
+  border: 2px solid cadetblue;
+  border-radius: 10px;
+  color: cadetblue;
 }
 .objDiv {
-    border: 2px solid cadetblue;
-    border-radius: 10px;
-    margin-bottom: 1em;
-    margin-right: 1em;
-    max-width: 500px;
-    margin-left: 0.7em;
+  border: 2px solid cadetblue;
+  border-radius: 10px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+  max-width: 500px;
+  margin-left: 0.7em;
 }
 .objDiv2 {
-    border: 2px solid cadetblue;
-    border-radius: 10px;
+  border: 2px solid cadetblue;
+  border-radius: 10px;
 }
 .anchor {
-    font-family: Arial, Helvetica, sans-serif;
-    color: cadetblue;
-    text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  color: cadetblue;
+  text-decoration: none;
 }
 .anchor:hover {
-    color: cadetblue;
+  color: cadetblue;
 }
-#homeIcon {
-    width: 2em;
-    height: 2em;
-    margin-bottom: 1em;
-    margin-right: 6em;
+.homeIcon {
+  width: 2em;
+  height: 2em;
+  margin-bottom: 1em;
 }
 #homeTitle {
-    width: 90%;
+  width: 90%;
 }
 .footerLogo {
-    width: 1.5em;
-    height: 1.5em;
-    margin: 0 1em 0 1em;
-    cursor: pointer;
+  width: 1.5em;
+  height: 1.5em;
+  margin: 0 1em 0 1em;
+  cursor: pointer;
 }
 footer p {
-    margin-bottom: 0.5em;
+  margin-bottom: 0.5em;
 }
 #spinner {
-    margin-left: 5em;
+  margin-left: 5em;
 }
 h2 {
-    display: inline-block;
+  display: inline-block;
 }
 
 .tooltip-inner {
-    background-color: cadetblue;
-    box-shadow: 0px 0px 4px black;
-    opacity: 1 !important;
+  background-color: cadetblue;
+  box-shadow: 0px 0px 4px black;
+  opacity: 1 !important;
 }
 
-/* Ho trovato questo codice sul web per cambiare il colore alla freccia ma non funziona*/
+/* Ho trovato questo codice sul web per cambiare il colore alla freccia del tooltip ma non funziona*/
 .tooltip.bs-tooltip-end .tooltip-arrow::before {
-    border-right-color: cadetblue !important;
+  border-right-color: cadetblue !important;
 }
 
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0, 0, 0, 0.4); 
+}
+
+.modal-content {
+  background-color: aliceblue;
+  margin: 15% auto; 
+  padding: 20px;
+  border: 1px solid cadetblue;
+  width: 80%; 
+}
+
+.close {
+  color: cadetblue;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+#topArrow {
+    margin-right: 15em;
+}

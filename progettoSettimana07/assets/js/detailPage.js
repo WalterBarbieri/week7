@@ -2,6 +2,9 @@ const apiKey =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDVkOGIyZjg4Zjc0MDAwMTQyODc0MTAiLCJpYXQiOjE2ODM4NTIwNzksImV4cCI6MTY4NTA2MTY3OX0.jxr2SpjKDwYilHZUG0JnZh5qIm_u-JJT1fxbaoO36aM";
 const detailObjContainer = document.getElementById("detailObjContainer");
 
+window.onload = function (){
+$('[data-toggle="tooltip"]').tooltip();
+
 let objAsString = JSON.parse(sessionStorage.getItem("selectedProduct"));
 const url2 =
   "https://striveschool-api.herokuapp.com/api/product/" + objAsString;
@@ -54,3 +57,4 @@ fetch(url2, {
   
     detailObjContainer.appendChild(objDiv);
   }
+}

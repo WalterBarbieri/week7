@@ -12,6 +12,18 @@ const inputForm = document.getElementById("inputForm");
 const searchForm = document.getElementById("searchForm");
 const modifyButton = document.getElementById("modifyButton");
 const backButton = document.getElementById("backButton");
+const dinamicTitle = document.getElementById("dinamicTitle");
+const span = document.getElementsByClassName("close")[(0)];
+const span2 = document.getElementsByClassName("close")[(1)];
+const modal = document.getElementById("infoModal");
+const modalTitle = document.getElementById("modalTitle");
+const modalText = document.getElementById("modalText");
+const deleteModalBtn = document.getElementById("deleteModalBtn");
+const closeDeleteModalBtn = document.getElementById("closeDeleteModalBtn");
+const deleteModal = document.getElementById("deleteModal");
+const deleteModalTitle = document.getElementById("deleteModalTitle");
+const deleteModalText = document.getElementById("deleteModalText");
+const resetButton = document.getElementById("resetButton");
 const url = "https://striveschool-api.herokuapp.com/api/product/";
 const apiKey =
   "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDVkOGIyZjg4Zjc0MDAwMTQyODc0MTAiLCJpYXQiOjE2ODM4NTIwNzksImV4cCI6MTY4NTA2MTY3OX0.jxr2SpjKDwYilHZUG0JnZh5qIm_u-JJT1fxbaoO36aM";
@@ -52,17 +64,21 @@ inputButton.onclick = function (event) {
         (prodImageUrl.value = ""),
         (prodPrice.value = ""),
         (idSearch.value = ""),
-        alert('Oggetto caricato con successo')
+        (modalTitle.textContent = "Complimenti!"),
+        (modalText.textContent = "Oggetto caricato con successo"),
+        (modal.style.display = "block")
       )
       .then(fetchAndDisplay());
   } else {
-    alert(
-      "Attenzione, inserisci tutti i valori di input per creare un oggetto"
-    );
+    (modalTitle.textContent = "Attenzione"),
+      (modalText.textContent =
+        "Inserisci tutti i valori di input per creare un oggetto"),
+      (modal.style.display = "block");
   }
 };
 
-/**Funzione display oggetti */
+/**Funzione onload */
+
 window.onload = function () {
   $('[data-toggle="tooltip"]').tooltip();
   if (sessionStorage.getItem("selectedProduct")) {
@@ -112,6 +128,8 @@ const fetchAndDisplay = function () {
     });
 };
 
+/**Funzione display oggetti */
+
 function displayObj(objects) {
   objects.forEach((object) => {
     const objDiv = document.createElement("div");
@@ -160,6 +178,8 @@ function displayObj(objects) {
     objId.append(idAnchor);
     objContainer.appendChild(objDiv);
 
+    dinamicTitle.textContent = "Crea un Nuovo Oggetto!";
+
     /**Funzione per inserire ID oggetto nel form IdInput */
 
     idAnchor.onclick = function () {
@@ -184,9 +204,7 @@ searchButton.onclick = function (event) {
     })
       .then((raw) => {
         if (!raw.ok) {
-          throw new Error(
-            "Attenzione! Nessun prodotto corrisponde all'ID inserita."
-          );
+          throw new Error("Nessun prodotto corrisponde all'ID inserita.");
         }
         return raw.json();
       })
@@ -194,19 +212,22 @@ searchButton.onclick = function (event) {
         console.log(dato);
         objContainer.innerHTML = "";
         displayIdObj(dato);
-        prodName.value = inputButton.disabled = true;
+        inputButton.disabled = true;
         modifyButton.disabled = false;
         modifyButton.hidden = false;
         backButton.disabled = false;
         backButton.hidden = false;
       })
       .catch((error) => {
-        alert(error.message);
+        (modalTitle.textContent = "Attenzione"),
+          (modalText.textContent = error.message),
+          (modal.style.display = "block");
       });
   } else {
-    alert(
-      "Inserisci un ID o clicca sull'ID dell'oggetto desiderato per passare alla modalità modifica/elimina"
-    );
+    (modalTitle.textContent = "Attenzione"),
+      (modalText.textContent =
+        "Inserisci un ID o clicca sull'ID dell'oggetto desiderato per passare alla modalità modifica/elimina"),
+      (modal.style.display = "block");
     return;
   }
 };
@@ -263,12 +284,16 @@ function displayIdObj(object) {
   prodBrand.value = object.brand;
   prodImageUrl.value = object.imageUrl;
   prodPrice.value = object.price;
+  dinamicTitle.textContent = "Modifica il Tuo Oggetto!";
 
   /**Funzione Delete Button */
   objDeleteButton.onclick = function () {
-    let result = confirm("Sei sicuro di voler eliminare l'oggetto?");
-
-    if (result === true) {
+    deleteModalTitle.textContent = "Attenzione";
+    deleteModalText.textContent = "Sei sicuro di voler rimuovere l'oggetto?";
+    deleteModalBtn.textContent = 'Rimuovi'
+    deleteModal.style.display = "block";
+    deleteModalBtn.onclick = function () {
+      deleteModal.style.display = "none";
       sessionStorage.clear();
       const url2 =
         "https://striveschool-api.herokuapp.com/api/product/" + idSearch.value;
@@ -281,11 +306,14 @@ function displayIdObj(object) {
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Errore durante la rimozione dell'oggetto.");
+            throw new Error(
+              "Errore durante la rimozione dell'oggetto. Controllare che l'ID sia inserita nel corrispettivo campo di input"
+            );
           }
-          alert("Oggetto rimosso con successo."),
-            (objContainer.innerHTML = ""),
-            fetchAndDisplay();
+          (modalTitle.textContent = "Complimenti"),
+            (modalText.textContent = "Oggetto rimosso con successo"),
+            (modal.style.display = "block");
+          (objContainer.innerHTML = ""), fetchAndDisplay();
           idSearch.value = "";
           idSearch.value = "";
           prodName.value = "";
@@ -301,12 +329,14 @@ function displayIdObj(object) {
           searchButton.disabled = false;
           fetchAndDisplay();
           return;
-        }).catch((error) => {
+        })
+        .catch((error) => {
           console.error(error);
+          (modalTitle.textContent = "Attenzione"),
+            (modalText.textContent = error),
+            (modal.style.display = "block");
         });
-    } else {
-      return;
-    }
+    };
   };
 }
 
@@ -352,13 +382,16 @@ modifyButton.onclick = function (event) {
       (backButton.disabled = true),
       (backButton.hidden = true),
       (searchButton.disabled = false),
-      alert('Oggetto modificato con successo'),
+      (modalTitle.textContent = "Complimenti"),
+      (modalText.textContent = "Oggetto modificato con successo"),
+      (modal.style.display = "block"),
       fetchAndDisplay()
     );
   } else {
-    alert(
-      "Attenzione, inserisci tutti i valori di input per modificare un oggetto"
-    );
+    (modalTitle.textContent = "Attenzione"),
+      (modalText.textContent =
+        "Inserisci tutti i valori di input per modificare un oggetto"),
+      (modal.style.display = "block");
   }
 };
 
@@ -383,3 +416,39 @@ backButton.onclick = function (event) {
   fetchAndDisplay();
 };
 
+/**Funzione chiusura modali */
+span.onclick = function () {
+  modal.style.display = "none";
+};
+span2.onclick = function () {
+  deleteModal.style.display = "none";
+};
+closeDeleteModalBtn.onclick = function () {
+  deleteModal.style.display = "none";
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+  if (event.target == deleteModal) {
+    deleteModal.style.display = "none";
+  }
+};
+
+/**Funzione reset button */
+
+resetButton.onclick = function () {
+  deleteModalTitle.textContent = "Attenzione";
+  deleteModalText.textContent = "Sei sicuro di voler resettare il form?";
+  deleteModalBtn.textContent = 'Reset';
+  deleteModal.style.display = "block";
+  deleteModalBtn.onclick = function () {
+    deleteModal.style.display = "none";
+    prodName.value = "";
+    prodDescription.value = "";
+    prodBrand.value = "";
+    prodImageUrl.value = "";
+    prodPrice.value = "";
+  };
+};
